@@ -45,3 +45,8 @@ Make sure you have R and the following packages installed:
 install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt"))
 ```
 
+To generate the complete final report using the `Makefile`, simply run the following command from the root directory of this project:
+
+```bash
+make 
+```
