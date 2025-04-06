@@ -1,5 +1,4 @@
 
-
 final_report.html: code/04_render_report.R final_project.Rmd descriptive_analysis
 	Rscript code/04_render_report.R
 
@@ -28,3 +27,7 @@ descriptive_analysis: output/best_regression_table.rds output/table_stats.rds ou
 .PHONY: clean 
 clean:
 	rm -f output/*.rds && rm -f output/*.png && rm -f *.html
+	
+.PHONY: install
+install:
+	Rscript -e "renv::restore(prompt = FALSE)"

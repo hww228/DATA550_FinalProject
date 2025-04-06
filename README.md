@@ -39,14 +39,28 @@ This project performs the following steps:
 ##  How to Reproduce
 
 ###  Requirements
-Make sure you have R and the following packages installed:
-
+1. Make sure you have R and the following packages installed first:
 ```r
-install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt"))
+install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt", "broom.helpers", "cardx","car","parameters"))
 ```
-
-To generate the complete final report using the `Makefile`, simply run the following command from the root directory of this project:
-
+2. To reproduce the full analysis and generate the final report from scratch, execute the following commands in your project root:
+```bash
+make clean
+```
+This will clean previously generated outputs.
+3. Then to build the entire project pipeline (data cleaning, tables, plots, models, and report), run:
 ```bash
 make 
 ```
+This will re-run all necessary scripts and render the final report as `final_report.html`.
+
+
+##  Package Environment Setup
+
+This project also uses [`renv`](https://rstudio.github.io/renv/) to ensure package reproducibility.
+1. Before building the project, confirm that you has the `renv` package installed, run `"renv" %in% row.names(installed.packages())`. If the above command returns `FALSE`, install the `renv` package using `install.packages("renv"")`.
+To restore the project-specific package environment using the `renv.lock` file, run:
+```bash
+make install
+```
+This will ensure all required packages are installed with the correct versions for full reproducibility.
