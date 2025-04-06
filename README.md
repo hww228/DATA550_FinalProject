@@ -34,7 +34,7 @@ This project performs the following steps:
 ## How to Reproduce
 ### Package Environment Setup
 
-This project also uses [`renv`](https://rstudio.github.io/renv/) to ensure package reproducibility.
+This project uses [`renv`](https://rstudio.github.io/renv/) to ensure package reproducibility.
 
 1.  Before building the project, confirm that you has the `renv` package installed, run the following code in Console:
 
