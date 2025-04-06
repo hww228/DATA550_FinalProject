@@ -41,7 +41,7 @@ This project performs the following steps:
 ###  Requirements
 1. Make sure you have R and the following packages installed first:
 ```r
-install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt", "broom.helpers", "cardx","car","parameters"))
+install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt", "broom.helpers", "cardx", "car", "parameters"))
 ```
 2. To reproduce the full analysis and generate the final report from scratch, execute the following commands in your project root:
 ```bash
