@@ -39,7 +39,7 @@ This project performs the following steps:
 ##  How to Reproduce
 
 ###  Requirements
-1. Make sure you have R and the following packages installed first:
+1. Make sure you have R and the following packages installed first, run:
 ```r
 install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt", "broom.helpers", "cardx", "car", "parameters"))
 ```
@@ -48,6 +48,7 @@ install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggco
 make clean
 ```
 This will clean previously generated outputs.
+
 3. Then to build the entire project pipeline (data cleaning, tables, plots, models, and report), run:
 ```bash
 make 
