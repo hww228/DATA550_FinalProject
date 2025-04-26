@@ -24,7 +24,7 @@ The **Air Quality Dataset** from the UCI Machine Learning Repository contains in
 - **Evaluation:** Summarize findings and evaluate model performance.
 
 # Data Cleaning
-In this section, I use reproducible code with the here package to load the cleaned dataset (data_clean.rds), which was generated in an R script named clean_data.R. This script performs initial data cleaning, including creating a new datetime variable and removing extra rows and columns that contain only missing values.
+In this section, I use reproducible code with `here` package to load the cleaned dataset `data_clean.rds`, which was generated in an R script `clean_data.R`. This script performs initial data cleaning, including creating a new datetime variable and removing extra rows and columns that contain only missing values.
 
 ```{r, load-data}
 here::i_am("final_project.Rmd")
@@ -48,10 +48,10 @@ knitr::include_graphics(
 ```
 **Correlation Heatmap**
 
-High correlation among pollutant sensor readings suggests that they capture similar environmental trends.
-NOx and NO2 levels are strongly related, implying they can be used interchangeably in some models.
-Temperature and NOx levels have an inverse relationship, which could be important for air pollution forecasting.
-Humidity's role in air pollution appears minimal based on this dataset.
+- High correlation among pollutant sensor readings suggests that they capture similar environmental trends.
+- NOx and NO2 levels are strongly related, implying they can be used interchangeably in some models.
+- Temperature and NOx levels have an inverse relationship, which could be important for air pollution forecasting.
+- Humidity's role in air pollution appears minimal based on this dataset.
 
 ## Tabular analysis
 
@@ -72,7 +72,7 @@ The table presents the summary statistics of key variables in the Air Quality Da
 
 ## Time Series Data Visualization
 ```{r, Data_Visualization}
-#|fig.align = "center
+#|fig.align = "center"
 #|out.width = "60px"
 knitr::include_graphics(
   here::here("output/time_series_plot.png")
@@ -83,7 +83,7 @@ knitr::include_graphics(
 The time series plot visualizes the fluctuations in benzene concentration (C6H6.GT.) over periods, illustrating trends and seasonal variations.
 
 # Linear Regression Analysis
-I split the data into training and testing sets using an 80/20 time-based split and develop a linear regression model to predict benzene concentration (C6H6.GT.).
+I split the data into training and testing sets using an 80/20 time-based split and develop a linear regression model to predict benzene concentration `C6H6.GT.`.
 First, I fit a full model incorporating all regressors. 
 ```{r, full_model_linear_regression_analysis}
 full_model_regression <- readRDS(
@@ -92,26 +92,26 @@ full_model_regression <- readRDS(
 full_model_regression
 ```
 Then, I apply stepwise model selection using the Bayesian Information Criterion (BIC) to identify the optimal model.
-```{r, bset_model_linear_regression_analysis}
+```{r, best_model_linear_regression_analysis}
 best_model_bic_regression <- readRDS(
   file = here::here("output/best_regression_table.rds")
 ) 
 best_model_bic_regression
 ```
 # Model Evaluation
-Finally, I use the selected model to generate predictions on the test data, aiming to achieve the lowest Root Mean Squared Error (RMSE):
+Finally, I use the selected model to generate predictions on the test data, aiming to achieve the lowest Root Mean Squared Error (RMSE).
 ```{r model_evaluation}
 rmse <- readRDS(
   file = here::here("output/rmse.rds")
 )
 ```
- `r rmse`.
+The Root Mean Squared Error (RMSE) of the best model is: `r rmse`.
 
 # Conclusion
 In this report, we performed an exploratory analysis of the Air Quality Dataset. The steps included:
 
-Data Cleaning: Combining date and time into a datetime variable, removing unused columns, and handling missing values.
-Descriptive Analysis: Presenting summary statistics in a formatted table.
-Visualization: Creating a time series plot of benzene concentration.
-Modeling: Developing a linear regression model to predict benzene levels based on meteorological variables.
+- **Data Cleaning**: Combining date and time into a datetime variable, removing unused columns, and handling missing values.
+- **Descriptive Analysis**: Presenting summary statistics in a formatted table.
+- **Visualization**: Creating a time series plot of benzene concentration.
+- **Modeling**: Developing a linear regression model to predict benzene levels based on meteorological variables.
 

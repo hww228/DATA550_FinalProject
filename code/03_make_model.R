@@ -6,7 +6,10 @@ data_clean <- readRDS(
 library(tidyverse)
 library(gtsummary)
 library(gt)
-
+library(broom.helpers)
+library(cardx)
+library(parameters)
+library(car)
 data_clean <- data_clean %>% arrange(DateTime)
 
 # Split the data: first 80% as training, remaining 20% as testing

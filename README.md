@@ -2,37 +2,23 @@
 
 This repository contains a reproducible pipeline for analyzing air quality data collected in an Italian city from March 2004 to February 2005. The dataset includes hourly measurements of air pollutants and meteorological conditions. The analysis focuses on cleaning the data, summarizing key variables, visualizing patterns, and building regression models to predict benzene levels.
 
-------------------------------------------------------------------------
+---
 
 ## Project Overview
 
 This project performs the following steps:
 
-1.  **Data Cleaning**
-    -   Merges date and time into a single `DateTime` column\
-    -   Removes rows/columns with only missing values\
-    -   Saves cleaned data as `data_clean.rds`
-2.  **Descriptive Summary Table**
-    -   `code/01_make_table.R` creates two tables:
-        -   A variable description table\
-        -   A summary statistics table for key variables
-3.  **Visualizations**
-    -   `code/02_make_plot.R` generates:
-        -   A **correlation heatmap** of numeric variables (`corr_plot.png`)\
-        -   A **time series plot** of benzene concentration (`time_series_plot.png`)
-4.  **Modeling**
-    -   `code/03_make_model.R` fits a full linear regression model to predict benzene\
-    -   Applies **BIC-based stepwise selection** to choose the best model\
-    -   Outputs regression summary tables and calculates RMSE
-5.  **Final Report**
-    -   Compiled using `final_project.Rmd`\
-    -   Summarizes the methodology, EDA, and modeling results\
-    -   Output: `final_report.html`
+1. **Data Cleaning** (`code/00_clean_data.R`)
+2. **Descriptive Summary Table** (`code/01_make_table.R`)
+3. **Visualizations** (`code/02_make_plot.R`)
+4. **Modeling** (`code/03_make_model.R`)
+5. **Final Report Rendering** (`code/04_render_report.R`)
 
-------------------------------------------------------------------------
+All scripts save their outputs in the `output/` directory. The final report is rendered as `final_report.html` in the `final_report/` directory.
 
-## How to Reproduce
-### Package Environment Setup
+---
+
+## How to Reproduce the Report Locally
 
 This project uses [`renv`](https://rstudio.github.io/renv/) to ensure package reproducibility.
 
@@ -44,36 +30,83 @@ This project uses [`renv`](https://rstudio.github.io/renv/) to ensure package re
 
 If the above command returns `FALSE`, install the `renv` package using `install.packages("renv")` in Console.
 
-2.  To restore the project-specific package environment using the `renv.lock` file, run:
+2. Install necessary R packages (if needed):
+
+```r
+install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt", "broom.helpers", "cardx", "car", "parameters"))
+```
+
+3.  Restore package environment using the `renv.lock` file:
 
 ``` bash
 make install
 ```
-
-This will ensure all required packages are installed with the correct versions for full reproducibility.
-
-### Requirements
-
-1.  Make sure you have R and the following packages installed first, run:
-
-``` r
-install.packages(c("here", "tidyverse", "yaml", "kableExtra", "gtsummary", "ggcorrplot", "gt", "broom.helpers", "cardx", "car", "parameters"))
-```
-
-2.  To reproduce the full analysis and generate the final report from scratch, execute the following commands in your project root:
+4.  Clean previous outputs (optional):
 
 ``` bash
 make clean
 ```
 
-This will clean previously generated outputs.
-
-3.  Then to build the entire project pipeline (data cleaning, tables, plots, models, and report), run:
+5. Build the full project and generate `final_report/final_report.html`:
 
 ``` bash
-make 
+make
 ```
 
-This will re-run all necessary scripts and render the final report as `final_report.html`.
+---
+
+## Docker Instructions
+
+This project includes a Dockerfile that builds an image to fully reproduce the analysis inside a containerized environment.
+
+1. How to Build the Docker Image
+
+First, clone this repository:
+
+``` bash
+git clone git@github.com:hww228/DATA550_FinalProject.git
+cd DATA550_FinalProject
+```
+Then, build the Docker image (you must have Docker installed):
+``` bash
+docker build -t final_project_image .
+```
+or simply:
+``` bash
+make build_image
+```
+
+
+2. DockerHub Image
+
+You can also pull the pre-built image directly from DockerHub:
+``` bash
+docker pull youweihu/final_project_image
+```
+[DockerHub link](https://hub.docker.com/repositories/youweihu)
+
+
+3. How to Run the Docker Container to Generate the Report
+
+Use the Makefile target to run everything automatically:
+
+``` bash
+make docker_run
+```
+This will:
+- Create a `final_report/` folder locally (if not already present)
+- Mount it inside the container
+- Run the project pipeline
+- Output the generated `final_report.html` inside the `final_report/` folder.
+After it finishes, you can find your report locally at `final_report/final_report.html`
+
+
+
+
+
+
+
+
+
 
 

@@ -1,3 +1,4 @@
+library(here)
 here::i_am("code/00_clean_data.R")
 
 absolute_path_to_data <- here::here("data/AirQualityUCI.csv")
