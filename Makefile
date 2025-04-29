@@ -39,5 +39,5 @@ build_image:
 .PHONY: docker_run
 docker_run:
 	mkdir -p final_report
-	docker run --rm -v "$$(pwd)/final_report":/project/final_report final_project_image bash -c "make"
+	docker run --rm -v "$$(pwd)/final_report":/project/final_report youweihu/final_project_image bash -c "make"
 
