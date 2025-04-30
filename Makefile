@@ -31,7 +31,8 @@ clean:
 .PHONY: install
 install:
 	Rscript -e "renv::restore(prompt = FALSE)"
-
+	
+# Developer-only: rebuild the Docker image locally (not used for grading)
 .PHONY: build_image
 build_image:
 	docker build -t final_project_image .

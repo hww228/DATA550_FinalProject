@@ -59,15 +59,25 @@ make
 
 This project includes a Dockerfile that builds an image to fully reproduce the analysis inside a containerized environment.
 
-1. How to Build the Docker Image
+### 1. Using the Pre-Built DockerHub Image (Recommended for Reproducibility)
 
-First, clone this repository:
-
+You can pull the image directly from DockerHub:
 ``` bash
-git clone git@github.com:hww228/DATA550_FinalProject.git
-cd DATA550_FinalProject
+docker pull youweihu/final_project_image
 ```
-Then, build the Docker image (you must have Docker installed):
+[DockerHub link](https://hub.docker.com/repositories/youweihu)
+
+Run the pipeline inside a container with:
+``` bash
+make docker_run
+```
+This will:
+- Mount your local final_report/ directory
+- Execute the full workflow inside the container
+- Output final_report.html into your local final_report/ folder
+
+### 2. Building the Image Locally (for Developers Only)
+If you'd like to rebuild the image yourself instead of using DockerHub (you must have Docker installed):
 ``` bash
 docker build -t final_project_image .
 ```
@@ -75,38 +85,3 @@ or simply:
 ``` bash
 make build_image
 ```
-
-
-2. DockerHub Image
-
-You can also pull the pre-built image directly from DockerHub:
-``` bash
-docker pull youweihu/final_project_image
-```
-[DockerHub link](https://hub.docker.com/repositories/youweihu)
-
-
-3. How to Run the Docker Container to Generate the Report
-
-Use the Makefile target to run everything automatically:
-
-``` bash
-make docker_run
-```
-This will:
-- Create a `final_report/` folder locally (if not already present)
-- Mount it inside the container
-- Run the project pipeline
-- Output the generated `final_report.html` inside the `final_report/` folder.
-After it finishes, you can find your report locally at `final_report/final_report.html`
-
-
-
-
-
-
-
-
-
-
-
